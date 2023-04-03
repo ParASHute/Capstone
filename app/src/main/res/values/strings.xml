@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">My Application</string>
-    <string name="access_token">sk.eyJ1IjoieW91bmdyb2NrY2hvaSIsImEiOiJjbGZqNjN5ZzUwNTU2NDJxbTJ3dXRrdXk0In0.b782Ik5OPNTLSN5hIkux0A</string>
+    <string name="mapbox_access_token">sk.eyJ1IjoieW91bmdyb2NrY2hvaSIsImEiOiJjbGZqNjN5ZzUwNTU2NDJxbTJ3dXRrdXk0In0.b782Ik5OPNTLSN5hIkux0A</string>
 
-    //권한 요청시 자세한 설명을 위한 문자열 추가
     <string name="user_location_permission_explanation">EXPLANATION_HERE</string>
 </resources>
