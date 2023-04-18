@@ -51,8 +51,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public static double Lat; // 위도
     public static double Lon; // 경도
 
-    public static double HSULat = 37.582419;
-    public static double HsULon = 127.011160;
+    // 37.58232, 127.01039
+    public static double HSULat = 37.58232;
+    public static double HsULon = 127.01039;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +99,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(@NonNull MapboxMap mapboxMap) {
         this.mapboxMap = mapboxMap;
+        /*mapboxMap.setStyle(Style.TRAFFIC_DAY,
+                new Style.OnStyleLoaded() {
+                    @Override public void onStyleLoaded(@NonNull Style style) {
+                        enableLocationComponent(style);
+                    }
+                });*/
         mapboxMap.setStyle(new Style.Builder().fromUri("mapbox://styles/youngrockchoi/clgib5i6q000101o637a7nha5"), new Style.OnStyleLoaded() { // Mapbox Studio에서 편집한 내용은 여기서 다 저장됨
             @Override
             public void onStyleLoaded(@NonNull Style style) {
@@ -138,7 +145,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             // 컴포넌트의 카메라 모드를 설정
             locationComponent.setCameraMode(CameraMode.TRACKING); // 트랙킹 모드
 
-            locationComponent.setRenderMode(RenderMode.GPS);
+            // Set the rendermode
+            // 위치 표시기 설정. (COMPASS, GPS, NORMAL)
+            locationComponent.setRenderMode(RenderMode.COMPASS);
 
             initLocationEngine();
         }else {
