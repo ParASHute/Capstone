@@ -23,8 +23,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_9
+        targetCompatibility JavaVersion.VERSION_1_9
     }
 }
 
@@ -37,16 +37,12 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
-    //new build rule for the latest Mapbox Maps SDK for Android.
-
-/*    implementation 'com.mapbox.mapboxsdk:mapbox-android-core:5.0.0'
-    implementation 'com.mapbox.mapboxsdk:mapbox-sdk-services:6.11.0'
-    implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:9.7.0'
-    implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-locationlayer:0.11.0'*/
-
+    // Mapbox SDK
     implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:9.7.1'
-    implementation 'com.mapbox.mapboxsdk:mapbox-android-core:3.1.0'
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-core:5.0.0'
 
+    implementation 'com.mapbox.mapboxsdk:mapbox-sdk-services:6.11.0'
 
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-annotation-v9:0.9.0'
 
 }

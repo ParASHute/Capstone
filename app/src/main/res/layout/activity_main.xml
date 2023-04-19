@@ -17,10 +17,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
+        mapbox:mapbox_pulsingLocationCircleRadius="1.0"
         mapbox:mapbox_cameraTargetLat="37.582419"
         mapbox:mapbox_cameraTargetLng="127.011160"
-        mapbox:mapbox_cameraZoom="16">
-    </com.mapbox.mapboxsdk.maps.MapView>
+        mapbox:mapbox_cameraZoom="16"/>
+
+    <Button
+        android:id="@+id/btnStartNavigation"
+        android:layout_width="117dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="48dp"
+        android:enabled="false"
+        android:text="길찾기"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/mapView"
+        app:layout_constraintVertical_bias="0.9"
+        mapbox:layout_constraintStart_toStartOf="parent"
+        mapbox:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnHSU"
@@ -39,5 +52,6 @@
         android:text="내위치"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
