@@ -6,7 +6,9 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconOffset;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineCap;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineColor;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineDasharray;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineJoin;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineTranslate;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineWidth;
 import static com.mapbox.core.constants.Constants.PRECISION_6;
 
@@ -16,12 +18,16 @@ import android.icu.number.Precision;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.mapbox.android.core.location.LocationEngine;
 import com.mapbox.android.core.location.LocationEngineCallback;
@@ -48,6 +54,7 @@ import com.mapbox.mapboxsdk.location.LocationComponentActivationOptions;
 import com.mapbox.mapboxsdk.location.LocationComponentOptions;
 import com.mapbox.mapboxsdk.location.modes.CameraMode;
 import com.mapbox.mapboxsdk.location.modes.RenderMode;
+import com.mapbox.mapboxsdk.maps.Image;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
@@ -62,12 +69,14 @@ import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import com.mapbox.mapboxsdk.utils.BitmapUtils;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
 
 /**
  * Mapbox Core Library 사용해 기기 위치가 변경될 때마다 업데이트
@@ -98,7 +107,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private Symbol symbol;
     private Point destinationPosition;
     private Point originPosition;
-    private Button startBtn;
     private Button mylocBtn;
     private Button HSUlocBtn;
 
@@ -108,6 +116,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private static final String ICON_SOURCE_ID = "icon-source-id";
     private static final String RED_PIN_ICON_ID = "red-pin-icon-id";
     private static final String MARKER = "marker";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,7 +130,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         mylocBtn = findViewById(R.id.btnMyLoc);
         HSUlocBtn = findViewById(R.id.btnHSU);
-        startBtn = findViewById(R.id.btnStartNavigation);
         mylocBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -150,16 +158,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
-        startBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               // NavigationLauncherOptions options = NavigationLauncherOptions.builder();
-
-            }
-        });
-
     }
+
     // onCreate end
+
    /* private void addMarkerToStyle(Style style) {
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.red_marker);
         style.addImage(RED_MARKER, bitmap, true);
@@ -181,9 +183,94 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             public void onStyleLoaded(@NonNull Style style) {
                 enableLocationComponent(style);
                 //addMarkerToStyle(style);
+               /* ImageView hoveringMarker = new ImageView(MainActivity.this);
+                hoveringMarker.setImageResource(R.drawable.red_marker);
+                ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(
+                        ViewGroup.LayoutParams.WRAP_CONTENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT);
+                hoveringMarker.setLayoutParams(params);
+                mapView.addView(hoveringMarker);
+
+                initDottedLineSourceAndLayer(style);
+
+                mapboxMap.addOnCameraIdleListener(MainActivity.this);*/
             }
         });
     }
+
+  /*  @Override
+    public void onCameraIdle() {
+        if(mapboxMap != null) {
+            destinationPosition = Point.fromLngLat(
+                    mapboxMap.getCameraPosition().target.getLongitude(),
+                    mapboxMap.getCameraPosition().target.getLatitude());
+            getRoute(destinationPosition);
+        }
+    }*/
+
+   /* private void initDottedLineSourceAndLayer(@NonNull Style style) {
+        style.addSource(new GeoJsonSource(SOURCE_ID));
+        style.addLayerBelow(
+                new LineLayer(
+                        DIRECTIONS_LAYER_ID, SOURCE_ID).withProperties(
+                        lineWidth(4.5f),
+                        lineColor(Color.BLACK),
+                        lineTranslate(new Float[] {0f, 4f}),
+                        lineDasharray(new Float[] {1.2f, 1.2f})
+                ), LAYER_BELOW_ID);
+    }*/
+
+/*
+    @SuppressWarnings( {"MissingPermission"})
+    private void getRoute(Point destinationPosition) {
+        MapboxDirections client = MapboxDirections.builder()
+                .accessToken(getString(R.string.mapbox_access_token))
+                .routeOptions(
+                        RouteOptions.builder()
+                                .coordinatesList(Arrays.asList(originPosition, destinationPosition))
+                                .profile(DirectionsCriteria.PROFILE_WALKING)
+                                .overview(DirectionsCriteria.OVERVIEW_FULL)
+                                .build()
+                ).build();
+
+        client.enqueueCall(new Callback<DirectionsResponse>() {
+            @Override
+            public void onResponse(Call<DirectionsResponse> call, Response<DirectionsResponse> response) {
+                if(response.body() == null) {
+                    return;
+                }else if(response.body().routes().size() < 1) {
+                    return;
+                }
+                drawNavigationPolylineRoute(response.body().routes().get(0));
+            }
+
+            @Override
+            public void onFailure(Call<DirectionsResponse> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "Error " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+*/
+   /* private void drawNavigationPolylineRoute(final DirectionsRoute route) {
+        if(mapboxMap != null) {
+            mapboxMap.getStyle(new Style.OnStyleLoaded() {
+                @Override
+                public void onStyleLoaded(@NonNull Style style) {
+                    List<Feature> directionsRouteFeatureList = new ArrayList<>();
+                    LineString lineString = LineString.fromPolyline(route.geometry(), PRECISION_6);
+                    List<Point> coordinates = lineString.coordinates();
+                    for (int i = 0; i < coordinates.size(); i++) {
+                        directionsRouteFeatureList.add(Feature.fromGeometry(LineString.fromLngLats(coordinates)));
+                    }
+                    dashedLineDirectionsFeatureCollection = FeatureCollection.fromFeatures(directionsRouteFeatureList);
+                    GeoJsonSource source = style.getSourceAs(SOURCE_ID);
+                    if (source != null) {
+                        source.setGeoJson(dashedLineDirectionsFeatureCollection);
+                    }
+                }
+            });
+        }
+    }*/
 
     @Override
     public boolean onMapClick(@NonNull LatLng point) {
@@ -209,17 +296,16 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         originPosition = Point.fromLngLat(Lon, Lat); // 현 위치
 
         if(mapboxMap != null) {
-            mapboxMap.getStyle(new Style.OnStyleLoaded() {
-                @Override
-                public void onStyleLoaded(@NonNull Style style) {
-                    initSource(style);
-                    initLayers(style);
-                }
-            });
+           mapboxMap.setStyle(new Style.Builder().fromUri("mapbox://styles/youngrockchoi/clgib5i6q000101o637a7nha5"), new Style.OnStyleLoaded() {
+               @Override
+               public void onStyleLoaded(@NonNull Style style) {
+                   enableLocationComponent(style);
+                   initSource(style);
+                   initLayers(style);
+               }
+           });
         }
-
         getRoute_walking(originPosition, destinationPosition);
-
         return true;
     }
 
@@ -232,25 +318,33 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         style.addSource(iconGeoJsonSource);
     }
 
-    private void initLayers(@NonNull Style style) {
+    /**
+     * Add the route and marker icon layers to the map
+     */
+    private void initLayers(@NonNull Style loadedMapStyle) {
         LineLayer routeLayer = new LineLayer(ROUTE_LAYER_ID, ROUTE_SOURCE_ID);
 
-        routeLayer.setProperties(lineCap(Property.LINE_CAP_ROUND),
+// Add the LineLayer to the map. This layer will display the directions route.
+        routeLayer.setProperties(
+                lineCap(Property.LINE_CAP_ROUND),
                 lineJoin(Property.LINE_JOIN_ROUND),
                 lineWidth(5f),
-                lineColor(Color.parseColor("#009688")));
+                lineColor(Color.parseColor("#009688"))
+        );
+        loadedMapStyle.addLayer(routeLayer);
 
-        style.addImage(RED_PIN_ICON_ID, BitmapUtils.getBitmapFromDrawable(
+// Add the red marker icon image to the map
+        loadedMapStyle.addImage(RED_PIN_ICON_ID, BitmapUtils.getBitmapFromDrawable(
                 getResources().getDrawable(R.drawable.red_marker)));
 
-        style.addLayer(new SymbolLayer(ICON_LAYER_ID, ICON_SOURCE_ID).withProperties(
+// Add the red marker icon SymbolLayer to the map
+        loadedMapStyle.addLayer(new SymbolLayer(ICON_LAYER_ID, ICON_SOURCE_ID).withProperties(
                 iconImage(RED_PIN_ICON_ID),
                 iconIgnorePlacement(true),
                 iconAllowOverlap(true),
-                iconOffset(new Float[] { 0f, -9f })
-        ));
-
+                iconOffset(new Float[] {0f, -9f})));
     }
+
     // bitmap을 string으로 변환 메소드
    /* private String bitmapToString(Bitmap bitmap) {
        ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -390,7 +484,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 Toast.makeText(MainActivity.this, "Error " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 
     private static class MainActivityLocationCallback implements LocationEngineCallback<LocationEngineResult> {
@@ -462,9 +555,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         // Prevent leaks
         if (locationEngine != null) {
             locationEngine.removeLocationUpdates(callback);
-        }
-        if(client != null) {
-            client.cancelCall();
         }
         mapView.onDestroy();
     }
