@@ -3,14 +3,18 @@ package com.example.myapplication;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAllowOverlap;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconIgnorePlacement;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconOffset;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineCap;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineColor;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineJoin;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineWidth;
+import static com.mapbox.core.constants.Constants.PRECISION_6;
 
 import android.annotation.SuppressLint;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.icu.number.Precision;
 import android.location.Location;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -31,17 +35,17 @@ import com.mapbox.api.directions.v5.MapboxDirections;
 import com.mapbox.api.directions.v5.models.DirectionsResponse;
 import com.mapbox.api.directions.v5.models.DirectionsRoute;
 import com.mapbox.api.directions.v5.models.RouteOptions;
+import com.mapbox.geojson.Feature;
+import com.mapbox.geojson.FeatureCollection;
+import com.mapbox.geojson.LineString;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.annotations.Icon;
-import com.mapbox.mapboxsdk.annotations.IconFactory;
-import com.mapbox.mapboxsdk.annotations.Marker;
-import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.location.LocationComponent;
 import com.mapbox.mapboxsdk.location.LocationComponentActivationOptions;
+import com.mapbox.mapboxsdk.location.LocationComponentOptions;
 import com.mapbox.mapboxsdk.location.modes.CameraMode;
 import com.mapbox.mapboxsdk.location.modes.RenderMode;
 import com.mapbox.mapboxsdk.maps.MapView;
@@ -51,12 +55,12 @@ import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.plugins.annotation.Symbol;
 import com.mapbox.mapboxsdk.plugins.annotation.SymbolManager;
 import com.mapbox.mapboxsdk.plugins.annotation.SymbolOptions;
+import com.mapbox.mapboxsdk.style.layers.LineLayer;
+import com.mapbox.mapboxsdk.style.layers.Property;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import com.mapbox.mapboxsdk.utils.BitmapUtils;
 
-
-import java.io.ByteArrayOutputStream;
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
 import java.util.List;
@@ -81,22 +85,29 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public static double Lat; // 위도
     public static double Lon; // 경도
 
-    // 37.58232, 127.01039
+    // 37.58232, 127.01039 학교 중앙
     public static double HSULat = 37.58232;
-    public static double HsULon = 127.01039;
+    public static double HSULon = 127.01039;
+    public static double HSULib_Lat = 37.58252;
+    public static double HSULib_Lon = 127.01073;
 
-    private Marker destinationMarker;
-    private Point destinationPosition;
-    private Point originPosition;
-    private Button startnavbtn;
     private MapboxDirections client;
     // variables for calculating and drawing a route
     private DirectionsRoute currentRoute;
     private SymbolManager symbolManager;
     private Symbol symbol;
-    private SymbolOptions symbolOptions;
+    private Point destinationPosition;
+    private Point originPosition;
+    private Button startBtn;
+    private Button mylocBtn;
+    private Button HSUlocBtn;
 
-    private static final String RED_MARKER = "marker";
+    private static final String ROUTE_LAYER_ID = "route-layer-id";
+    private static final String ROUTE_SOURCE_ID = "route-source-id";
+    private static final String ICON_LAYER_ID = "icon-layer-id";
+    private static final String ICON_SOURCE_ID = "icon-source-id";
+    private static final String RED_PIN_ICON_ID = "red-pin-icon-id";
+    private static final String MARKER = "marker";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,13 +119,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this::onMapReady);
 
-        Button mylocBtn = findViewById(R.id.btnMyLoc);
+        mylocBtn = findViewById(R.id.btnMyLoc);
+        HSUlocBtn = findViewById(R.id.btnHSU);
+        startBtn = findViewById(R.id.btnStartNavigation);
         mylocBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 CameraPosition position = new CameraPosition.Builder()
                         .target(new LatLng(Lat, Lon))
-                        .zoom(17)
+                        .zoom(15)
                         .bearing(0)
                         .tilt(0)
                         .build();
@@ -123,13 +136,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
-        Button HSUlocBtn = findViewById(R.id.btnHSU);
         HSUlocBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 CameraPosition position = new CameraPosition.Builder()
-                        .target(new LatLng(HSULat, HsULon))
-                        .zoom(17)
+                        .target(new LatLng(HSULat, HSULon))
+                        .zoom(15)
                         .bearing(0)
                         .tilt(0)
                         .build();
@@ -137,6 +149,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 Toast.makeText(getApplicationContext(), String.format("학교 위치로 이동합니다."), Toast.LENGTH_LONG).show();
             }
         });
+
+        startBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               // NavigationLauncherOptions options = NavigationLauncherOptions.builder();
+
+            }
+        });
+
     }
     // onCreate end
    /* private void addMarkerToStyle(Style style) {
@@ -152,7 +173,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void onStyleLoaded(@NonNull Style style) {
                 enableLocationComponent(style);
-                addMarkerImageToStyle(style);
+              //  addMarkerImageToStyle(style);
             }
         });*/
         mapboxMap.setStyle(new Style.Builder().fromUri("mapbox://styles/youngrockchoi/clgib5i6q000101o637a7nha5"), new Style.OnStyleLoaded() { // Mapbox Studio에서 편집한 내용은 여기서 다 저장됨
@@ -163,29 +184,73 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
     }
+
     @Override
     public boolean onMapClick(@NonNull LatLng point) {
         //Toast.makeText(MainActivity.this, String.format("Lat " + point.getLatitude() + " Lon " + point.getLongitude()), Toast.LENGTH_SHORT).show();
         //Bitmap icon = BitmapFactory.decodeResource(this.getResources(), R.drawable.red_marker);
         //mapboxMap.getStyle(this::addMarkerToStyle);
 
-        if(symbol != null) {
+        /*if(symbol != null) {
             symbolManager.deleteAll();
         }
-
         symbolManager = new SymbolManager(mapView, mapboxMap, mapboxMap.getStyle());
 
         symbolManager.setIconAllowOverlap(true);
         symbolManager.setTextAllowOverlap(true);
 
-        symbolOptions = new SymbolOptions()
+        SymbolOptions symbolOptions = new SymbolOptions()
                 .withLatLng(point)
-                .withIconImage(RED_MARKER)
+                .withIconImage(MARKER)
                 .withIconSize(2.0f);
-        symbol = symbolManager.create(symbolOptions);
+        symbol = symbolManager.create(symbolOptions);*/
+
+        destinationPosition = Point.fromLngLat(point.getLongitude(), point.getLatitude()); // 클릭한 위치
+        originPosition = Point.fromLngLat(Lon, Lat); // 현 위치
+
+        if(mapboxMap != null) {
+            mapboxMap.getStyle(new Style.OnStyleLoaded() {
+                @Override
+                public void onStyleLoaded(@NonNull Style style) {
+                    initSource(style);
+                    initLayers(style);
+                }
+            });
+        }
+
+        getRoute_walking(originPosition, destinationPosition);
+
         return true;
     }
 
+    private void initSource(@NonNull Style style) {
+        style.addSource(new GeoJsonSource(ROUTE_SOURCE_ID));
+
+        GeoJsonSource iconGeoJsonSource = new GeoJsonSource(ICON_SOURCE_ID, FeatureCollection.fromFeatures(new Feature[] {
+                Feature.fromGeometry(Point.fromLngLat(originPosition.longitude(), originPosition.latitude())),
+                Feature.fromGeometry(Point.fromLngLat(destinationPosition.longitude(), destinationPosition.latitude()))}));
+        style.addSource(iconGeoJsonSource);
+    }
+
+    private void initLayers(@NonNull Style style) {
+        LineLayer routeLayer = new LineLayer(ROUTE_LAYER_ID, ROUTE_SOURCE_ID);
+
+        routeLayer.setProperties(lineCap(Property.LINE_CAP_ROUND),
+                lineJoin(Property.LINE_JOIN_ROUND),
+                lineWidth(5f),
+                lineColor(Color.parseColor("#009688")));
+
+        style.addImage(RED_PIN_ICON_ID, BitmapUtils.getBitmapFromDrawable(
+                getResources().getDrawable(R.drawable.red_marker)));
+
+        style.addLayer(new SymbolLayer(ICON_LAYER_ID, ICON_SOURCE_ID).withProperties(
+                iconImage(RED_PIN_ICON_ID),
+                iconIgnorePlacement(true),
+                iconAllowOverlap(true),
+                iconOffset(new Float[] { 0f, -9f })
+        ));
+
+    }
     // bitmap을 string으로 변환 메소드
    /* private String bitmapToString(Bitmap bitmap) {
        ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -208,11 +273,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             // Get LocationComponent 객체
             LocationComponent locationComponent = mapboxMap.getLocationComponent();
 
+            LocationComponentOptions locationComponentOptions = LocationComponentOptions.builder(this)
+                    .build();
+
             //Set the LocationComponent activation options
             // LocationComponent 설정
             LocationComponentActivationOptions locationComponentActivationOptions =
                     LocationComponentActivationOptions.builder(this, loadedMapStyle)
                             .useDefaultLocationEngine(false)
+                            .locationComponentOptions(locationComponentOptions)
                             .build();
 
             // Activate with the LocationComponentActivationOptions object
@@ -275,47 +344,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
     }
 
-
-   /* @Override
-    public boolean onMapClick(@NonNull LatLng point) {
-       *//* IconFactory iconFactory = IconFactory.getInstance(MainActivity.this);
-        Icon red_marker = iconFactory.fromResource(R.drawable.red_marker);
-        if (destinationMarker != null) {
-            mapboxMap.removeMarker(destinationMarker);
-        }
-        destinationMarker = mapboxMap.addMarker(new MarkerOptions()
-                .position(point)
-                .icon(red_marker)
-                .title("Marker")
-        );*//*
-        *//*
-        IconFactory iconFactory = IconFactory.getInstance(MainActivity.this);
-        Icon red_marker = iconFactory.fromResource(R.drawable.red_marker);
-        if(symbol != null) {
-            symbolManager.deleteAll();
-        }
-        symbolManager = new SymbolManager(mapView, mapboxMap, mapboxMap.getStyle());
-
-        symbolManager.setIconAllowOverlap(true);
-        symbolManager.setTextAllowOverlap(true);
-
-        symbolOptions = new SymbolOptions()
-                .withLatLng(new LatLng(point.getLatitude(), point.getLongitude()))
-                .withIconImage(RED_MARKER)
-                .withIconSize(1.3f);
-        symbol = symbolManager.create(symbolOptions);*//*
-
-        destinationPosition = Point.fromLngLat(point.getLongitude(), point.getLatitude());
-        originPosition = Point.fromLngLat(Lon, Lat);
-
-        getRoute_walking(originPosition, destinationPosition);
-
-        startnavbtn.setEnabled(true);
-        startnavbtn.setBackgroundResource(com.mapbox.mapboxsdk.R.color.mapbox_blue);
-
-        return true;
-    }*/
-
     private void getRoute_walking(Point originPosition, Point destinationPosition) {
         client = MapboxDirections.builder()
                 .accessToken(getString(R.string.mapbox_access_token))
@@ -343,6 +371,18 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 Toast.makeText(getApplicationContext(), String.format("예상 시간 : " + String.valueOf(time)+" 분 \n" +
                         "목적지 거리 : " +distances+ " km"), Toast.LENGTH_LONG).show();
+
+                if(mapboxMap != null) {
+                    mapboxMap.getStyle(new Style.OnStyleLoaded() {
+                        @Override
+                        public void onStyleLoaded(@NonNull Style style) {
+                            GeoJsonSource source = style.getSourceAs(ROUTE_SOURCE_ID);
+                            if(source != null) {
+                                source.setGeoJson(LineString.fromPolyline(currentRoute.geometry(), PRECISION_6));
+                            }
+                        }
+                    });
+                }
             }
 
             @Override
@@ -422,6 +462,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         // Prevent leaks
         if (locationEngine != null) {
             locationEngine.removeLocationUpdates(callback);
+        }
+        if(client != null) {
+            client.cancelCall();
         }
         mapView.onDestroy();
     }
