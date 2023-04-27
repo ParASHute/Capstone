@@ -78,6 +78,6 @@ public class SearchingKey extends AppCompatActivity {
     }
 
     private void firebaseUserSearch() {
-        FirebaseRecyclerAdapter<>
+       /* FirebaseRecyclerAdapter<>*/
     }
 }
