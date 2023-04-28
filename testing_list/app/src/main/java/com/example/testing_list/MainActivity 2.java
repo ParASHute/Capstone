@@ -32,25 +32,25 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //아랫줄 추가
         editSearch = (EditText) findViewById(R.id.editSearch);
-        // 에딧텍스트 이용한 검색 방법
-
-        //여기서는 그냥 리스트를 갱신하고 하는 부분 -> 원 앱에서는 파이어 베이스 연동을 통해서 진행 되는부분
         listView = (ListView) findViewById(R.id.listView);
+
         // 리스트를 생성한다.
         list = new ArrayList<String>();
+
         // 검색에 사용할 데이터을 미리 저장한다.
         settingList();
+
         // 리스트의 모든 데이터를 arraylist에 복사한다.// list 복사본을 만든다.
         arraylist = new ArrayList<String>();
         arraylist.addAll(list);
+
         // 리스트에 연동될 아답터를 생성한다.
         adapter = new SearchAdapter(list, this);
+
         // 리스트뷰에 아답터를 연결한다.
         listView.setAdapter(adapter);
 
-        //아래서부터 에딧 택스트를 받는 부분 -> 넣어야 하는부분
         // input창에 검색어를 입력시 "addTextChangedListener" 이벤트 리스너를 정의한다.
         editSearch.addTextChangedListener(new TextWatcher() {
             @Override
@@ -70,8 +70,11 @@ public class MainActivity extends AppCompatActivity {
                 search(text);
             }
         });
+
+
     }
-    // 검색을 수행하는 메
+
+    // 검색을 수행하는 메소드
     public void search(String charText) {
 
         // 문자 입력시마다 리스트를 지우고 새로 뿌려준다.
@@ -98,10 +101,7 @@ public class MainActivity extends AppCompatActivity {
         // 리스트 데이터가 변경되었으므로 아답터를 갱신하여 검색된 데이터를 화면에 보여준다.
         adapter.notifyDataSetChanged();
     }
-    //여기까지
 
-
-    //여기는 상관 없음
     // 검색에 사용될 데이터를 리스트에 추가한다.
     private void settingList(){
         list.add("채수빈");

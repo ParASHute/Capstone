@@ -56,8 +56,4 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
             this.FloorNum = itemView.findViewById(R.id.FloorNum);
         }
     }
-    public void setItems(ArrayList<List> list){
-        arrayList = list;
-        notifyDataSetChanged();
-    }
 }

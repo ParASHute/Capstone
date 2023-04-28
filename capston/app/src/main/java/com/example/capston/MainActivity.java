@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 //DB에서 값 가지고 오는 역할
                 arrayList.clear(); // 기존에 값이 있다면 그것을 초기화 시킴
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()){ // 리스트 추출
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) { // 리스트 추출
                     List list = snapshot.getValue(List.class); // DB에서 가지고 온 데이터를 List객체에 넣음
                     arrayList.add(list);// 위에 담은걸 베열에 넣어 리사이클러뷰로 보낼 준비
                 }
@@ -72,7 +72,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        adapter = new CustomAdapter(arrayList, this);
-        recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
     }
 }
