@@ -4,6 +4,10 @@ public class List {
     private String Build;
     private String Office;
     private String Floor;
+
+   // private double Lat;
+   // private double Lon;
+
     public List(){}
 
     public void setFloor(String floor) {
