@@ -26,28 +26,39 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.maps.MapView;
+import com.mapbox.mapboxsdk.maps.MapboxMap;
+import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.concurrent.ScheduledExecutorService;
 
-public class MainActivity extends AppCompatActivity {
-
+public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
+    private MapView mapView;
+    private MapboxMap mapboxMap;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Mapbox.getInstance(this, getString(R.string.mapbox_access_token));
         setContentView(R.layout.activity_main);
 
-        Button btnClick = findViewById(R.id.button);
-        Button btnNav = findViewById(R.id.btnNav);
-        btnClick.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, SearchingKey.class);
-            startActivity(intent);
-        });
+        mapView = findViewById(R.id.main_mapView);
+        mapView.onCreate(savedInstanceState);
+        mapView.getMapAsync(this::onMapReady);
+    }
 
-        btnNav.setOnClickListener(view -> {
-            Intent intent = new Intent(MainActivity.this, NavigationActivity.class);
-            startActivity(intent);
-        });
+    @Override
+    public void onMapReady(@NonNull MapboxMap mapboxMap) {
+        this.mapboxMap = mapboxMap;
+        mapboxMap.setStyle(new Style.Builder().fromUri("mapbox://styles/youngrockchoi/clgib5i6q000101o637a7nha5"),
+                new Style.OnStyleLoaded() {
+                    @Override
+                    public void onStyleLoaded(@NonNull Style style) {
+
+                    }
+                });
     }
 }

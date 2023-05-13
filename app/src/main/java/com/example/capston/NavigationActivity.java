@@ -12,7 +12,10 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineWidth;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.viewpager.widget.ViewPager;
 
+import android.animation.ArgbEvaluator;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
@@ -21,8 +24,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.mapbox.android.core.location.LocationEngine;
 import com.mapbox.android.core.location.LocationEngineCallback;
 import com.mapbox.android.core.location.LocationEngineProvider;
@@ -61,6 +72,7 @@ import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import com.mapbox.mapboxsdk.utils.BitmapUtils;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -93,8 +105,8 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
     private Symbol symbol;*/
     private Point destinationPosition;
     private Point originPosition;
-    private Button mylocBtn;
-    private Button HSUlocBtn;
+    private ImageButton mylocBtn;
+    private ImageButton HSUlocBtn;
 
     private static final String ROUTE_LAYER_ID = "route-layer-id";
     private static final String ROUTE_SOURCE_ID = "route-source-id";
@@ -102,6 +114,11 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
     private static final String ICON_SOURCE_ID = "icon-source-id";
     private static final String RED_PIN_ICON_ID = "red-pin-icon-id";
     private static final String MARKER = "marker";
+
+    private ViewPager viewPager;
+    private CardViewAdapter cardViewAdapter;
+    private List<Model> models;
+    private TextView search_text;
 
     /*private Intent intent;
     private double[] destination;*/
@@ -112,7 +129,7 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
         Mapbox.getInstance(this, getString(R.string.mapbox_access_token));
         setContentView(R.layout.activity_navigation);
 
-        mapView = (MapView)findViewById(R.id.mapView);
+        mapView = findViewById(R.id.nav_mapView);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this::onMapReady);
 
@@ -128,19 +145,19 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
         mylocBtn.setOnClickListener(view -> {
             CameraPosition position = new CameraPosition.Builder()
                     .target(new LatLng(Lat, Lon))
-                    .zoom(15)
+                    .zoom(16)
                     .bearing(0)
                     .tilt(0)
                     .build();
             mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(position), 7000);
             Toast.makeText(getApplicationContext(), String.format("내 위치로 이동합니다."), Toast.LENGTH_LONG).show();
-           // Toast.makeText(getApplicationContext(),dest_Lat + " " + dest_Log, Toast.LENGTH_SHORT).show();
+            // Toast.makeText(getApplicationContext(),dest_Lat + " " + dest_Log, Toast.LENGTH_SHORT).show();
         });
 
         HSUlocBtn.setOnClickListener(view -> {
             CameraPosition position = new CameraPosition.Builder()
                     .target(new LatLng(HSULat, HSULon))
-                    .zoom(15)
+                    .zoom(16)
                     .bearing(0)
                     .tilt(0)
                     .build();
@@ -148,8 +165,23 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
             Toast.makeText(getApplicationContext(), String.format("학교 위치로 이동합니다."), Toast.LENGTH_LONG).show();
         });
 
-    }
+        models = new ArrayList<>();
+        models.add(new Model(R.drawable.changwi, "창의관"));
+        models.add(new Model(R.drawable.gonghaka, "공학관"));
+        models.add(new Model(R.drawable.sangsang, "상상관"));
+        cardViewAdapter = new CardViewAdapter(models, this);
+        viewPager = findViewById(R.id.viewPager);
+        viewPager.setPadding(40, 0, 40, 0);
+        viewPager.setPageMargin(getResources().getDisplayMetrics().widthPixels / -9);
+        viewPager.setAdapter(cardViewAdapter);
 
+        search_text = findViewById(R.id.search_text);
+        search_text.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(), SearchingKey.class);
+            startActivity(intent);
+        });
+
+    }
     @Override
     public void onMapReady(@NonNull MapboxMap mapboxMap) {
         this.mapboxMap = mapboxMap;
