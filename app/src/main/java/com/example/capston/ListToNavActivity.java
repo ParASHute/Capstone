@@ -40,9 +40,6 @@ import com.mapbox.geojson.FeatureCollection;
 import com.mapbox.geojson.LineString;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.camera.CameraPosition;
-import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
-import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.location.LocationComponent;
 import com.mapbox.mapboxsdk.location.LocationComponentActivationOptions;
 import com.mapbox.mapboxsdk.location.LocationComponentOptions;
@@ -52,8 +49,6 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
-import com.mapbox.mapboxsdk.plugins.annotation.Symbol;
-import com.mapbox.mapboxsdk.plugins.annotation.SymbolManager;
 import com.mapbox.mapboxsdk.style.layers.LineLayer;
 import com.mapbox.mapboxsdk.style.layers.Property;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
@@ -68,12 +63,16 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class NavigationActivity extends AppCompatActivity implements OnMapReadyCallback, PermissionsListener, MapboxMap.OnMapClickListener {
+public class ListToNavActivity extends AppCompatActivity implements OnMapReadyCallback, PermissionsListener {
+    private Intent intent;
+    private double[] destinations; // intent로 받은 목적지 위도와 경도값
+    private String dest_Lat;
+    private String dest_Lon;
     private MapView mapView;
     private MapboxMap mapboxMap;
     private PermissionsManager permissionsManager;
     private LocationEngine locationEngine;
-    private NavigationActivityLocationCallback callback = new NavigationActivityLocationCallback(this);
+    private ListToNavActivityLocationCallback callback = new ListToNavActivityLocationCallback(this);
     private static final long DEFAULT_INTERVAL_IN_MILLISECONDS = 1000L;
     private static final long DEFAULT_MAX_WAIT_TIME = DEFAULT_INTERVAL_IN_MILLISECONDS * 5;
 
@@ -81,20 +80,12 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
     public static double Lon; // 경도
 
     // 37.58232, 127.01039 학교 중앙
-    public static double HSULat = 37.58232;
-    public static double HSULon = 127.01039;
-    public static double HSULib_Lat = 37.58252;
-    public static double HSULib_Lon = 127.01073;
 
     private MapboxDirections client;
     // variables for calculating and drawing a route
     private DirectionsRoute currentRoute;
-    /*private SymbolManager symbolManager;
-    private Symbol symbol;*/
-    private Point destinationPosition;
     private Point originPosition;
-    private Button mylocBtn;
-    private Button HSUlocBtn;
+    private Point destinationPosition;
 
     private static final String ROUTE_LAYER_ID = "route-layer-id";
     private static final String ROUTE_SOURCE_ID = "route-source-id";
@@ -103,57 +94,40 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
     private static final String RED_PIN_ICON_ID = "red-pin-icon-id";
     private static final String MARKER = "marker";
 
-    /*private Intent intent;
-    private double[] destination;*/
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Mapbox.getInstance(this, getString(R.string.mapbox_access_token));
-        setContentView(R.layout.activity_navigation);
+        setContentView(R.layout.activity_list_to_nav);
 
-        mapView = (MapView)findViewById(R.id.mapView);
+        mapView = (MapView)findViewById(R.id.mapView2);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this::onMapReady);
 
-        /*intent = getIntent();
-        destination = intent.getDoubleArrayExtra("destination");
+        intent = getIntent();
+        destinations = intent.getDoubleArrayExtra("destination");
+        dest_Lat = String.valueOf(destinations[0]);
+        dest_Lon = String.valueOf(destinations[1]);
 
-        String dest_Lat = String.valueOf(destination[0]);
-        String dest_Log = String.valueOf(destination[1]);*/
-
-        mylocBtn = findViewById(R.id.btnMyLoc);
-        HSUlocBtn = findViewById(R.id.btnHSU);
-
-        mylocBtn.setOnClickListener(view -> {
-            CameraPosition position = new CameraPosition.Builder()
-                    .target(new LatLng(Lat, Lon))
-                    .zoom(15)
-                    .bearing(0)
-                    .tilt(0)
-                    .build();
-            mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(position), 7000);
-            Toast.makeText(getApplicationContext(), String.format("내 위치로 이동합니다."), Toast.LENGTH_LONG).show();
-           // Toast.makeText(getApplicationContext(),dest_Lat + " " + dest_Log, Toast.LENGTH_SHORT).show();
+        Button navBtn = findViewById(R.id.NavStartBtn);
+        navBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onNavStart();
+            }
         });
 
-        HSUlocBtn.setOnClickListener(view -> {
-            CameraPosition position = new CameraPosition.Builder()
-                    .target(new LatLng(HSULat, HSULon))
-                    .zoom(15)
-                    .bearing(0)
-                    .tilt(0)
-                    .build();
-            mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(position), 7000);
-            Toast.makeText(getApplicationContext(), String.format("학교 위치로 이동합니다."), Toast.LENGTH_LONG).show();
+        Button backBtn = findViewById(R.id.LTN_BackBtn);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
         });
-
     }
-
     @Override
     public void onMapReady(@NonNull MapboxMap mapboxMap) {
         this.mapboxMap = mapboxMap;
-        mapboxMap.addOnMapClickListener(this::onMapClick);
         mapboxMap.setStyle(new Style.Builder().fromUri("mapbox://styles/youngrockchoi/clgib5i6q000101o637a7nha5"),
                 new Style.OnStyleLoaded() {
                     @Override
@@ -163,11 +137,9 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
                 });
     }
 
-    @Override
-    public boolean onMapClick(@NonNull LatLng point) {
-        destinationPosition = Point.fromLngLat(point.getLongitude(), point.getLatitude()); // 클릭한 위치
-        originPosition = Point.fromLngLat(Lon, Lat); // 현 위치
-
+    public boolean onNavStart() {
+        destinationPosition = Point.fromLngLat(destinations[1], destinations[0]); // intent로 받은 값을 목적지로 설정.
+        originPosition = Point.fromLngLat(Lon, Lat);
         if(mapboxMap != null) {
             mapboxMap.setStyle(new Style.Builder().fromUri("mapbox://styles/youngrockchoi/clgib5i6q000101o637a7nha5"), new Style.OnStyleLoaded() {
                 @Override
@@ -178,7 +150,7 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
                 }
             });
         }
-        getRoute_walking(originPosition, destinationPosition);
+        getRoute_walking(originPosition, destinationPosition); // 길찾기 메소드 실행.
         return true;
     }
 
@@ -337,21 +309,20 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
 
             @Override
             public void onFailure(Call<DirectionsResponse> call, Throwable t) {
-                Toast.makeText(NavigationActivity.this, "Error " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ListToNavActivity.this, "Error " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    private static class NavigationActivityLocationCallback implements LocationEngineCallback<LocationEngineResult> {
-        private final WeakReference<NavigationActivity> activityWeakReference;
-
-        NavigationActivityLocationCallback(NavigationActivity activity) {
+    private static class ListToNavActivityLocationCallback implements LocationEngineCallback<LocationEngineResult> {
+        private final WeakReference<ListToNavActivity> activityWeakReference;
+        ListToNavActivityLocationCallback(ListToNavActivity activity) {
             this.activityWeakReference = new WeakReference<>(activity);
         }
 
         @Override
         public void onSuccess(LocationEngineResult locationEngineResult) {
-            NavigationActivity activity = activityWeakReference.get();
+            ListToNavActivity activity = activityWeakReference.get();
             if(activity != null) {
                 Location location = locationEngineResult.getLastLocation();
                 if(location == null) {
@@ -369,8 +340,8 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
 
         @Override
         public void onFailure(@NonNull Exception e) {
-            Log.e("LocationChangeActivity", e.getLocalizedMessage());
-            NavigationActivity activity = activityWeakReference.get();
+            Log.e("ListToNav", e.getLocalizedMessage());
+            ListToNavActivity activity = activityWeakReference.get();
             if(activity != null) {
                 Toast.makeText(activity, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
@@ -410,10 +381,6 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        // Prevent leaks
-        if (locationEngine != null) {
-            locationEngine.removeLocationUpdates(callback);
-        }
         mapView.onDestroy();
     }
 
@@ -422,5 +389,6 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
         super.onLowMemory();
         mapView.onLowMemory();
     }
+
 
 }
