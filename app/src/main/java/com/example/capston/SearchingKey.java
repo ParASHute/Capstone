@@ -9,6 +9,7 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,7 +30,7 @@ public class SearchingKey extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private ArrayList<List> OriginalDataList = new ArrayList<>();
     private ArrayList<List> searchList = new ArrayList<>();
-    private EditText editText;
+    private SearchView searchView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,7 +62,36 @@ public class SearchingKey extends AppCompatActivity {
             }
         });
 
-        editText = findViewById(R.id.searchView);
+        searchView = findViewById(R.id.searchView);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                searchList.clear();
+
+                if(newText.equals("")) {
+                    adapter.setItems(OriginalDataList);
+                } else {
+                    for(int i = 0; i < OriginalDataList.size(); i++) {
+                        if(OriginalDataList.get(i).getOffice() == null)
+                            Log.e("afterTextChanged", "OriginalDataList is null");
+                        else {
+                            if(OriginalDataList.get(i).getOffice().toLowerCase().contains(newText.toLowerCase())) {
+                                searchList.add(OriginalDataList.get(i));
+                            }
+                        }
+                    }
+                    adapter.setItems(searchList);
+                }
+                return true;
+            }
+        });
+
+        /*editText = findViewById(R.id.searchView);
         editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -93,7 +123,7 @@ public class SearchingKey extends AppCompatActivity {
                     adapter.setItems(searchList);
                 }
             }
-        });
+        });*/
 
         recyclerView = findViewById(R.id.recyclerView); //메인에 있는 리사이클러뷰랑 연결
         recyclerView.setHasFixedSize(true); // 리사이클러뷰 기존 성능 강화
