@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="blue">#044BFD</color>
+    <color name="color1">#424549</color>
+    <color name="color2">#7e455e</color>
+    <color name="color3">#796e25</color>
+    <color name="color4">#59717c</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="white">#FFFFFFFF</color>
+    <string name="app_name">capston</string>
+    <string name="default_web_client_id" translatable="false">717919002418-74in3f2159vv0deapem4cede25u0j6oh.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">717919002418</string>
+    <string name="google_api_key" translatable="false">AIzaSyCNN5gAW7i4klJEH59E_TE-a-vPzaRVgWo</string>
+    <string name="google_app_id" translatable="false">1:717919002418:android:624168ce27a45b3bbfc12b</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCNN5gAW7i4klJEH59E_TE-a-vPzaRVgWo</string>
+    <string name="google_storage_bucket" translatable="false">capstone-9c025.appspot.com</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="mapbox_access_token">sk.eyJ1IjoieW91bmdyb2NrY2hvaSIsImEiOiJjbGZqNjN5ZzUwNTU2NDJxbTJ3dXRrdXk0In0.b782Ik5OPNTLSN5hIkux0A</string>
+    <string name="new_location">New lat: %1$s New longitude: %2$s</string>
+    <string name="project_id" translatable="false">capstone-9c025</string>
+    <string name="user_location_permission_explanation">This app needs location permissions in order to show its functionality.</string>
+    <string name="user_location_permission_not_granted">You didn\'t grant location permissions.</string>
+    <style name="SplashTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+    </style>
+    <style name="Theme.Capston" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="windowNoTitle">true</item>
+        
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorPrimaryVariant">@color/blue</item>
+        <item name="colorOnPrimary">@color/white</item>
+        
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        
+    </style>
+</resources>

@@ -1,0 +1,174 @@
+[
+    {
+        "merged": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-merged_res-50:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-main-52:/mipmap-xxxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-merged_res-50:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-main-52:/mipmap-mdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-merged_res-50:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-main-52:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-merged_res-50:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-main-52:/mipmap-mdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-merged_res-50:/layout_activity_splash.xml.flat",
+        "source": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-main-52:/layout/activity_splash.xml"
+    },
+    {
+        "merged": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-merged_res-50:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-main-52:/mipmap-xxxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-merged_res-50:/drawable_red_marker.png.flat",
+        "source": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-main-52:/drawable/red_marker.png"
+    },
+    {
+        "merged": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-merged_res-50:/xml_data_extraction_rules.xml.flat",
+        "source": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-main-52:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-merged_res-50:/drawable_ic_launcher_background.xml.flat",
+        "source": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-main-52:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-merged_res-50:/drawable-v24_button.jpg.flat",
+        "source": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-main-52:/drawable-v24/button.jpg"
+    },
+    {
+        "merged": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-merged_res-50:/drawable_card.xml.flat",
+        "source": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-main-52:/drawable/card.xml"
+    },
+    {
+        "merged": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-merged_res-50:/drawable_logo1.png.flat",
+        "source": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-main-52:/drawable/logo1.png"
+    },
+    {
+        "merged": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-merged_res-50:/layout_activity_main.xml.flat",
+        "source": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-main-52:/layout/activity_main.xml"
+    },
+    {
+        "merged": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-merged_res-50:/drawable_hsu_location.png.flat",
+        "source": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-main-52:/drawable/hsu_location.png"
+    },
+    {
+        "merged": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-merged_res-50:/drawable_location.png.flat",
+        "source": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-main-52:/drawable/location.png"
+    },
+    {
+        "merged": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-merged_res-50:/drawable_hsu_logo.png.flat",
+        "source": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-main-52:/drawable/hsu_logo.png"
+    },
+    {
+        "merged": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-merged_res-50:/layout_acivity_searchingkey.xml.flat",
+        "source": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-main-52:/layout/acivity_searchingkey.xml"
+    },
+    {
+        "merged": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-merged_res-50:/drawable_navigationarrow.png.flat",
+        "source": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-main-52:/drawable/navigationarrow.png"
+    },
+    {
+        "merged": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-merged_res-50:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-main-52:/mipmap-xhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-merged_res-50:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-main-52:/mipmap-xxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-merged_res-50:/drawable_gps.png.flat",
+        "source": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-main-52:/drawable/gps.png"
+    },
+    {
+        "merged": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-merged_res-50:/layout_viewpager_item.xml.flat",
+        "source": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-main-52:/layout/viewpager_item.xml"
+    },
+    {
+        "merged": "com.example.capston.app-merged_res-50:/layout_list_item.xml.flat",
+        "source": "com.example.capston.app-main-52:/layout/list_item.xml"
+    },
+    {
+        "merged": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-merged_res-50:/layout_list_item.xml.flat",
+        "source": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-main-52:/layout/list_item.xml"
+    },
+    {
+        "merged": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-merged_res-50:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-main-52:/mipmap-xxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-merged_res-50:/layout_activity_list_to_nav.xml.flat",
+        "source": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-main-52:/layout/activity_list_to_nav.xml"
+    },
+    {
+        "merged": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-merged_res-50:/drawable_sangsang.jpg.flat",
+        "source": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-main-52:/drawable/sangsang.jpg"
+    },
+    {
+        "merged": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-merged_res-50:/drawable_school.png.flat",
+        "source": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-main-52:/drawable/school.png"
+    },
+    {
+        "merged": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-merged_res-50:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-main-52:/mipmap-xhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-merged_res-50:/drawable_logo.png.flat",
+        "source": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-main-52:/drawable/logo.png"
+    },
+    {
+        "merged": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-merged_res-50:/drawable-v24_ic_launcher_foreground.xml.flat",
+        "source": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-main-52:/drawable-v24/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-merged_res-50:/drawable_search_outline.xml.flat",
+        "source": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-main-52:/drawable/search_outline.xml"
+    },
+    {
+        "merged": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-merged_res-50:/drawable_search.png.flat",
+        "source": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-main-52:/drawable/search.png"
+    },
+    {
+        "merged": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-merged_res-50:/drawable-v24_img.jpg.flat",
+        "source": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-main-52:/drawable-v24/img.jpg"
+    },
+    {
+        "merged": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-merged_res-50:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-main-52:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-merged_res-50:/drawable_gonghaka.jpg.flat",
+        "source": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-main-52:/drawable/gonghaka.jpg"
+    },
+    {
+        "merged": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-merged_res-50:/drawable_changwi.jpg.flat",
+        "source": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-main-52:/drawable/changwi.jpg"
+    },
+    {
+        "merged": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-merged_res-50:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-main-52:/mipmap-hdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-merged_res-50:/layout_activity_navigation.xml.flat",
+        "source": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-main-52:/layout/activity_navigation.xml"
+    },
+    {
+        "merged": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-merged_res-50:/xml_backup_rules.xml.flat",
+        "source": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-main-52:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-merged_res-50:/drawable_sangsangbugi.jpg.flat",
+        "source": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-main-52:/drawable/sangsangbugi.jpg"
+    },
+    {
+        "merged": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-merged_res-50:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-main-52:/mipmap-hdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-merged_res-50:/drawable_bg_gis_result_items_count.xml.flat",
+        "source": "/Users/a1/.gradle/daemon/7.5/com.example.capston.app-main-52:/drawable/bg_gis_result_items_count.xml"
+    }
+]
