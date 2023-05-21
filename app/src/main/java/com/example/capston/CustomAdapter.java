@@ -22,8 +22,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
     private Context context;
     // firebase 접근해 건물의 위도값과 경도값을 가져와야 함.
     // 임시 위도값, 경도값.
-    private double Lat = 37.58184;
-    private double Log = 127.00986;
+ //   private double Lat = 37.58184;
+ //   private double Log = 127.00986;
 
     public CustomAdapter(ArrayList<List> arrayList, Context Context) {
         this.dataList = arrayList;
@@ -51,11 +51,11 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         holder.FloorNum.setText(dataList.get(position).getFloor());
 
         holder.itemView.setOnClickListener(view -> { // item 클릭 시
-            double[] destination = new double[]{Lat, Log};
+            String[] destination = new String[]{dataList.get(position).getLat(), dataList.get(position).getLon()};
             // 여기서 해당 건물의 위도, 경도 값을 intent로 NavigationActivity에게 넘겨줘야함.
             Intent intent = new Intent(context, ListToNavActivity.class);
             intent.putExtra("destination", destination);
-            context.startActivity(intent);
+            context.startActivity(intent); // ListToNav Activity 실행.
         });
     }
 

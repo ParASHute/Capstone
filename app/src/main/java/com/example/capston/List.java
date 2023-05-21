@@ -4,9 +4,8 @@ public class List {
     private String Build;
     private String Office;
     private String Floor;
-
-   // private double Lat;
-   // private double Lon;
+    private String Lat;
+    private String Lon;
 
     public List(){}
 
@@ -22,6 +21,9 @@ public class List {
         this.Build = Build;
     }
 
+    public void setLat(String Lat) { this.Lat = Lat; }
+    public void setLon(String Lon) { this.Lon = Lon; }
+
     public String getFloor() {
         return Floor;
     }
@@ -33,4 +35,7 @@ public class List {
     public String getBuild() {
         return Build;
     }
+
+    public String getLat() { return Lat; }
+    public String getLon() { return Lon; }
 }
