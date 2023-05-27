@@ -1,0 +1,157 @@
+-- Merging decision tree log ---
+manifest
+ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:3:1-31:12
+INJECTED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:3:1-31:12
+INJECTED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:3:1-31:12
+	package
+		ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:3:70-98
+		INJECTED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml
+	xmlns:tools
+		ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:3:99-145
+	xmlns:android
+		ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:3:11-69
+application
+ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:4:3-20:17
+activity#com.unity3d.player.UnityPlayerActivity
+ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:5:5-11:16
+	android:screenOrientation
+		ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:5:111-147
+	android:launchMode
+		ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:5:148-179
+	android:hardwareAccelerated
+		ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:8:9-44
+	android:exported
+		ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:6:9-32
+	android:resizeableActivity
+		ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:7:9-43
+	android:configChanges
+		ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:5:180-361
+	android:theme
+		ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:5:69-110
+	android:name
+		ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:5:15-68
+meta-data#unityplayer.UnityActivity
+ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:9:7-82
+	android:value
+		ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:9:59-79
+	android:name
+		ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:9:18-58
+meta-data#android.notch_support
+ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:10:7-78
+	android:value
+		ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:10:55-75
+	android:name
+		ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:10:18-54
+meta-data#unity.tango-enable
+ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:12:5-73
+	android:value
+		ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:12:50-70
+	android:name
+		ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:12:16-49
+meta-data#unityplayer.SkipPermissionsDialog
+ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:13:5-88
+	android:value
+		ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:13:65-85
+	android:name
+		ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:13:16-64
+meta-data#unity.splash-mode
+ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:14:5-69
+	android:value
+		ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:14:49-66
+	android:name
+		ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:14:16-48
+meta-data#unity.splash-enable
+ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:15:5-74
+	android:value
+		ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:15:51-71
+	android:name
+		ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:15:16-50
+meta-data#unity.launch-fullscreen
+ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:16:5-78
+	android:value
+		ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:16:55-75
+	android:name
+		ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:16:16-54
+meta-data#unity.allow-resizable-window
+ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:17:5-84
+	android:value
+		ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:17:60-81
+	android:name
+		ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:17:16-59
+meta-data#notch.config
+ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:18:5-81
+	android:value
+		ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:18:44-78
+	android:name
+		ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:18:16-43
+meta-data#unity.build-id
+ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:19:5-101
+	android:value
+		ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:19:46-98
+	android:name
+		ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:19:16-45
+uses-feature#0x00030000
+ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:21:3-52
+	android:glEsVersion
+		ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:21:17-49
+uses-permission#android.permission.CAMERA
+ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:22:3-63
+	android:name
+		ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:22:20-60
+uses-permission#android.permission.INTERNET
+ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:23:3-65
+	android:name
+		ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:23:20-62
+uses-permission#android.permission.CHANGE_WIFI_MULTICAST_STATE
+ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:24:3-84
+	android:name
+		ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:24:20-81
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:25:3-77
+	android:name
+		ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:25:20-74
+uses-feature#android.hardware.location.gps
+ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:26:3-89
+	android:required
+		ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:26:62-86
+	android:name
+		ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:26:17-61
+uses-feature#android.hardware.location
+ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:27:3-85
+	android:required
+		ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:27:58-82
+	android:name
+		ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:27:17-57
+uses-feature#android.hardware.touchscreen
+ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:28:3-88
+	android:required
+		ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:28:61-85
+	android:name
+		ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:28:17-60
+uses-feature#android.hardware.touchscreen.multitouch
+ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:29:3-99
+	android:required
+		ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:29:72-96
+	android:name
+		ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:29:17-71
+uses-feature#android.hardware.touchscreen.multitouch.distinct
+ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:30:3-108
+	android:required
+		ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:30:81-105
+	android:name
+		ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml:30:17-80
+uses-sdk
+INJECTED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml
+INJECTED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml
+INJECTED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml
+INJECTED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml
+		ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml
+		ADDED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\hpmsp\AndroidStudioProjects\Capstone2\unityLibrary\src\main\AndroidManifest.xml

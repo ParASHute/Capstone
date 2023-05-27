@@ -1,0 +1,18 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+rootProject.name = "Capstone2"
+include ':app'
+include ':unityLibrary'
+project(':unityLibrary').projectDir=new File('C:\\Users\\hpmsp\\AndroidStudioProjects\\Capstone2\\unityLibrary')
