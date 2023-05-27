@@ -15,3 +15,5 @@ dependencyResolutionManagement {
 rootProject.name = "Capstone2"
 include ':app', ':unityLibrary'
 project(':unityLibrary').projectDir=new File('/Users/devynean/Android-Project/Capstone/unityLibrary')
+// unityLibrary 본인 디렉토리 경로로!
+// unityLibrary 폴더 우클릭 후 -> Copy Path/Reference -> Absolute Path
