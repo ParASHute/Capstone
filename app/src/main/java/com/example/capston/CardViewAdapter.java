@@ -63,7 +63,6 @@ public class CardViewAdapter extends PagerAdapter {
                    /* Intent intent = new Intent(context, TargetActivity.class);
                     //intent.putExtra("param", models.get(position).getTitle());
                     context.startActivity(intent);*/
-
                 }
                 else if(position==1){
                 }

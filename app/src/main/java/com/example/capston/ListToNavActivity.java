@@ -121,7 +121,11 @@ public class ListToNavActivity extends AppCompatActivity implements OnMapReadyCa
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onBackPressed();
+
+               // onBackPressed();
+                Intent intent1 = new Intent(getApplicationContext(), UnityPlayerActivity.class);
+                startActivity(intent1);
+
             }
         });
     }
