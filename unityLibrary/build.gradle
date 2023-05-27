@@ -23,8 +23,8 @@ dependencies {
 }
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion '30.0.3'
+    compileSdk 31
+    buildToolsVersion '29.0.3'
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -35,7 +35,7 @@ android {
         minSdkVersion 24
         targetSdkVersion 29
         ndk {
-            abiFilters 'armeabi-v7a'
+            abiFilters 'armeabi-v7a', 'x86', 'armeabi-v8'
         }
         versionCode 1
         versionName '1.0'

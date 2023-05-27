@@ -13,6 +13,5 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "Capstone2"
-include ':app'
-include ':unityLibrary'
-project(':unityLibrary').projectDir=new File('C:\\Users\\hpmsp\\AndroidStudioProjects\\Capstone2\\unityLibrary')
+include ':app', ':unityLibrary'
+project(':unityLibrary').projectDir=new File('/Users/devynean/Android-Project/Capstone/unityLibrary')

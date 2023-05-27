@@ -4,12 +4,12 @@ plugins {
 
 android {
     namespace 'com.example.capstone2'
-    compileSdk 33
+    compileSdk 31
 
     defaultConfig {
         applicationId "com.example.capstone2"
         minSdk 24
-        targetSdk 33
+        targetSdk 29
         ndk {
             abiFilters 'armeabi-v7a'
         }
@@ -29,13 +29,14 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    buildToolsVersion '29.0.3'
 }
 
 dependencies {
 
     implementation project(':unityLibrary')
     implementation fileTree(dir: project(':unityLibrary').getProjectDir().toString() + ('\\libs'), include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.5.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     testImplementation 'junit:junit:4.13.2'
