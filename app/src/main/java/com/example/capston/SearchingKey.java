@@ -1,10 +1,7 @@
 package com.example.capston;
 
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
-import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -125,7 +122,7 @@ public class SearchingKey extends AppCompatActivity {
             }
         });*/
 
-        recyclerView = findViewById(R.id.recyclerView); //메인에 있는 리사이클러뷰랑 연결
+        recyclerView = findViewById(R.id.gonghak_listview); //메인에 있는 리사이클러뷰랑 연결
         recyclerView.setHasFixedSize(true); // 리사이클러뷰 기존 성능 강화
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);

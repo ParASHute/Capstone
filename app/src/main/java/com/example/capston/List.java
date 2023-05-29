@@ -6,9 +6,26 @@ public class List {
     private String Office;
     private String Floor;
 
+    public String getLat() {
+        return Lat;
+    }
+
+    public void setLat(String lat) {
+        Lat = lat;
+    }
+
+    public String getLon() {
+        return Lon;
+    }
+
+    public void setLon(String lon) {
+        Lon = lon;
+    }
+
+    private String Lat;
+    private String Lon;
+
     public List(){}
-   // private double Lat;
-   // private double Lon;
     public String getProfile(){return Profile;}
     public  void setProfile(String profile) {this.Profile = profile;}
     public String getFloor() {

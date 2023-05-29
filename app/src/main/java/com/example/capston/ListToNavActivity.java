@@ -57,6 +57,7 @@ import com.mapbox.mapboxsdk.utils.BitmapUtils;
 import com.unity3d.player.UnityPlayerActivity;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -66,9 +67,9 @@ import retrofit2.Response;
 
 public class ListToNavActivity extends AppCompatActivity implements OnMapReadyCallback, PermissionsListener {
     private Intent intent;
-    private double[] destinations; // intent로 받은 목적지 위도와 경도값
-    private String dest_Lat;
-    private String dest_Lon;
+    private String[] destinations; // intent로 받은 목적지 위도와 경도값
+    private double dest_Lat;
+    private double dest_Lon;
     private MapView mapView;
     private MapboxMap mapboxMap;
     private PermissionsManager permissionsManager;
@@ -95,6 +96,7 @@ public class ListToNavActivity extends AppCompatActivity implements OnMapReadyCa
     private static final String RED_PIN_ICON_ID = "red-pin-icon-id";
     private static final String MARKER = "marker";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,9 +108,9 @@ public class ListToNavActivity extends AppCompatActivity implements OnMapReadyCa
         mapView.getMapAsync(this::onMapReady);
 
         intent = getIntent();
-        destinations = intent.getDoubleArrayExtra("destination");
-        dest_Lat = String.valueOf(destinations[0]);
-        dest_Lon = String.valueOf(destinations[1]);
+        destinations = intent.getStringArrayExtra("destination");
+        dest_Lat = Double.parseDouble(destinations[1]);
+        dest_Lon = Double.parseDouble(destinations[0]);
 
         Button arBtn = findViewById(R.id.ARStartBtn);
         arBtn.setOnClickListener(new View.OnClickListener() {
@@ -148,7 +150,7 @@ public class ListToNavActivity extends AppCompatActivity implements OnMapReadyCa
     }
 
     public boolean onNavStart() {
-        destinationPosition = Point.fromLngLat(destinations[1], destinations[0]); // intent로 받은 값을 목적지로 설정.
+        destinationPosition = Point.fromLngLat(dest_Lon, dest_Lat); // intent로 받은 값을 목적지로 설정.
         originPosition = Point.fromLngLat(Lon, Lat);
         if(mapboxMap != null) {
             mapboxMap.setStyle(new Style.Builder().fromUri("mapbox://styles/youngrockchoi/clgib5i6q000101o637a7nha5"), new Style.OnStyleLoaded() {

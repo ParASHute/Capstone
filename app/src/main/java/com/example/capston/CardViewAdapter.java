@@ -59,17 +59,28 @@ public class CardViewAdapter extends PagerAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(position==0) {
+                if(position==0) { //창의관
                    /* Intent intent = new Intent(context, TargetActivity.class);
                     //intent.putExtra("param", models.get(position).getTitle());
                     context.startActivity(intent);*/
-
+                    Intent changui_intent = new Intent(context, ChanguiList.class);
+                    context.startActivity(changui_intent);
                 }
-                else if(position==1){
+                else if(position==1){ // 공학관
+                    Intent gonghak_intent = new Intent(context, GonghakList.class);
+                    context.startActivity(gonghak_intent);
                 }
-                else if(position==2){
+                else if(position==2){ // 상상관
+                    Intent sangsang_intent = new Intent(context, SangSangList.class);
+                    context.startActivity(sangsang_intent);
                 }
-                else if(position==3){
+                else if(position==3){ // 미래관
+                    Intent mirae_intent = new Intent(context, MiraeList.class);
+                    context.startActivity(mirae_intent);
+                }
+                else if(position==4){ // 탐구관
+                    Intent tamgu_intent = new Intent(context, TamguList.class);
+                    context.startActivity(tamgu_intent);
                 }
             }
 

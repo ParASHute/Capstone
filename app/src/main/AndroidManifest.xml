@@ -13,11 +13,27 @@
         android:theme="@style/Theme.Capston"
         tools:targetApi="33">
         <activity
+            android:name=".TamguList"
+            android:exported="false" />
+        <activity
+            android:name=".MiraeList"
+            android:exported="false" />
+        <activity
+            android:name=".GonghakList"
+            android:exported="false" />
+        <activity
+            android:name=".SangSangList"
+            android:exported="false" />
+        <activity
+            android:name=".ChanguiList"
+            android:exported="false" />
+        <activity
             android:name=".SplashActivity"
             android:exported="true"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

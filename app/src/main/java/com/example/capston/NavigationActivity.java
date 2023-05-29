@@ -12,28 +12,18 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineWidth;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.viewpager.widget.ViewPager;
 
-import android.animation.ArgbEvaluator;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.mapbox.android.core.location.LocationEngine;
 import com.mapbox.android.core.location.LocationEngineCallback;
 import com.mapbox.android.core.location.LocationEngineProvider;
@@ -63,8 +53,6 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
-import com.mapbox.mapboxsdk.plugins.annotation.Symbol;
-import com.mapbox.mapboxsdk.plugins.annotation.SymbolManager;
 import com.mapbox.mapboxsdk.style.layers.LineLayer;
 import com.mapbox.mapboxsdk.style.layers.Property;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
@@ -79,7 +67,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
+// 메인화면
 public class NavigationActivity extends AppCompatActivity implements OnMapReadyCallback, PermissionsListener, MapboxMap.OnMapClickListener {
     private MapView mapView;
     private MapboxMap mapboxMap;
@@ -166,9 +154,12 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
         });
 
         models = new ArrayList<>();
-        models.add(new Model(R.drawable.changwi, "창의관"));
+        models.add(new Model(R.drawable.changui, "창의관"));
         models.add(new Model(R.drawable.gonghaka, "공학관"));
         models.add(new Model(R.drawable.sangsang, "상상관"));
+        models.add(new Model(R.drawable.mirae, "미래관"));
+        models.add(new Model(R.drawable.tamgu, "탐구관"));
+        
         cardViewAdapter = new CardViewAdapter(models, this);
         viewPager = findViewById(R.id.viewPager);
         viewPager.setPadding(40, 0, 40, 0);
