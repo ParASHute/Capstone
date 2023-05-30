@@ -108,24 +108,21 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
     private List<Model> models;
     private TextView search_text;
 
-    /*private Intent intent;
-    private double[] destination;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Mapbox access token is configured here. This needs to be called either in your application
+        // object or in the same activity which contains the mapview.
         Mapbox.getInstance(this, getString(R.string.mapbox_access_token));
+
+        // This contains the MapView in XML and needs to be called after the access token is configured.
         setContentView(R.layout.activity_navigation);
 
+        // Setup the MapView
         mapView = findViewById(R.id.nav_mapView);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this::onMapReady);
-
-        /*intent = getIntent();
-        destination = intent.getDoubleArrayExtra("destination");
-
-        String dest_Lat = String.valueOf(destination[0]);
-        String dest_Log = String.valueOf(destination[1]);*/
 
         mylocBtn = findViewById(R.id.btnMyLoc);
         HSUlocBtn = findViewById(R.id.btnHSU);
@@ -178,12 +175,7 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
         this.mapboxMap = mapboxMap;
         mapboxMap.addOnMapClickListener(this::onMapClick);
         mapboxMap.setStyle(new Style.Builder().fromUri("mapbox://styles/youngrockchoi/clgib5i6q000101o637a7nha5"),
-                new Style.OnStyleLoaded() {
-                    @Override
-                    public void onStyleLoaded(@NonNull Style style) {
-                        enableLocationComponent(style);
-                    }
-                });
+                style -> enableLocationComponent(style));
     }
 
     @Override
@@ -392,7 +384,7 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
 
         @Override
         public void onFailure(@NonNull Exception e) {
-            Log.e("LocationChangeActivity", e.getLocalizedMessage());
+            Log.e("NavigationActivity", e.getLocalizedMessage());
             NavigationActivity activity = activityWeakReference.get();
             if(activity != null) {
                 Toast.makeText(activity, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
