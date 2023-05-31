@@ -16,10 +16,11 @@
  - Firebase Realtime Database
 
 # 주요 기능
- **지도상에 경로 표시**
+
+ ## 지도상에 경로 표시
  
  Mapbox Java SDK에서 제공하는 **Directions API**를 통해 출발지와 목적지에 대한 최소 거리 경로를 얻고 맵상에 그려준다.
-```
+```java
    private void getRoute_walking(Point originPosition, Point destinationPosition) {
         client = MapboxDirections.builder()
                 .accessToken(getString(R.string.mapbox_access_token))
@@ -69,9 +70,9 @@
     }
 ```
  
- **학교 주요 시설 리스트**
+ ## 학교 주요 시설 리스트(Realtime Database)
  
- **Unity를 통해 AR로 경로 안내**
+ ## Unity를 통해 AR로 경로 안내
  
  
 # 참고 자료 
