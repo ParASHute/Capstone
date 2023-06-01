@@ -122,7 +122,7 @@ public class SearchingKey extends AppCompatActivity {
             }
         });*/
 
-        recyclerView = findViewById(R.id.gonghak_listview); //메인에 있는 리사이클러뷰랑 연결
+        recyclerView = findViewById(R.id.searchingkey_listview); //메인에 있는 리사이클러뷰랑 연결
         recyclerView.setHasFixedSize(true); // 리사이클러뷰 기존 성능 강화
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);

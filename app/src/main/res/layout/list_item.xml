@@ -3,14 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:background="#BFDBEF"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:elevation="10dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp">
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/bg_gis_result_items_count"
+        >
 
         <TextView
             android:id="@+id/OfficeName"
@@ -49,8 +53,14 @@
             android:id="@+id/profile"
             android:layout_width="149dp"
             android:layout_height="81dp"
-            app:srcCompat="@drawable/ic_launcher_background"
-            tools:layout_editor_absoluteX="3dp" />
+            app:circularflow_defaultRadius="15dp"
+            android:layout_marginStart="3dp"
+            android:scaleType="fitXY"
+            android:clipToOutline="true"
+            android:background="@drawable/search_outline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_launcher_background" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -21,6 +21,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.mapbox.android.core.location.LocationEngine;
@@ -57,7 +58,6 @@ import com.mapbox.mapboxsdk.utils.BitmapUtils;
 import com.unity3d.player.UnityPlayerActivity;
 
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -96,6 +96,10 @@ public class ListToNavActivity extends AppCompatActivity implements OnMapReadyCa
     private static final String RED_PIN_ICON_ID = "red-pin-icon-id";
     private static final String MARKER = "marker";
 
+    private Button working_nav_btn;
+    private Button ar_nav_btn;
+    private Button back_btn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,30 +116,17 @@ public class ListToNavActivity extends AppCompatActivity implements OnMapReadyCa
         dest_Lat = Double.parseDouble(destinations[1]);
         dest_Lon = Double.parseDouble(destinations[0]);
 
-        Button arBtn = findViewById(R.id.ARStartBtn);
-        arBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ListToNavActivity.this, UnityPlayerActivity.class);
-                startActivity(intent);
-            }
+        ar_nav_btn = findViewById(R.id.ar_nav_btn);
+        ar_nav_btn.setOnClickListener(view -> {
+            Intent intent = new Intent(ListToNavActivity.this, UnityPlayerActivity.class);
+            startActivity(intent);
         });
 
-        Button navBtn = findViewById(R.id.NavStartBtn);
-        navBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onNavStart();
-            }
-        });
+        working_nav_btn = findViewById(R.id.working_nav_btn);
+        working_nav_btn.setOnClickListener(view -> onNavStart());
 
-        Button backBtn = findViewById(R.id.LTN_BackBtn);
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
+        back_btn = findViewById(R.id.back_btn);
+        back_btn.setOnClickListener(view -> onBackPressed());
     }
     @Override
     public void onMapReady(@NonNull MapboxMap mapboxMap) {

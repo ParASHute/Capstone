@@ -22,35 +22,18 @@
         mapbox:mapbox_cameraTargetLng="127.011160"
         mapbox:mapbox_cameraZoom="16"/>
 
-    <TextView
-        android:id="@+id/search_text"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/bg_gis_result_items_count"
-        android:paddingLeft="16dp"
-        android:text="검색"
-        android:textColor="@android:color/black"
-        android:textSize="26sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="300dp"
-        android:layout_height="200dp"
-        android:layout_marginBottom="32dp"
+        android:layout_height="250dp"
+        android:layout_marginBottom="40dp"
         android:clipChildren="false"
         android:clipToPadding="false"
         android:contentDescription="viewpager"
         android:overScrollMode="never"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-    </androidx.viewpager.widget.ViewPager>
+        app:layout_constraintStart_toStartOf="parent"></androidx.viewpager.widget.ViewPager>
 
     <ImageButton
         android:id="@+id/btnMyLoc"
@@ -63,8 +46,7 @@
         android:scaleType="fitXY"
         android:src="@drawable/navigationarrow"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageButton
         android:id="@+id/btnHSU"
@@ -78,6 +60,20 @@
         android:src="@drawable/school"
         app:layout_constraintBottom_toTopOf="@+id/btnMyLoc"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageButton
+        android:id="@+id/search_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="24dp"
+        android:src="@drawable/search_background"
+        android:background="@color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!-- <Button
          android:id="@+id/btnHSU"

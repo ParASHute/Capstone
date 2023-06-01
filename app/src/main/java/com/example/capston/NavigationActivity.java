@@ -106,7 +106,7 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
     private ViewPager viewPager;
     private CardViewAdapter cardViewAdapter;
     private List<Model> models;
-    private TextView search_text;
+    private ImageButton search_text;
 
 
     @Override
@@ -160,7 +160,7 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
         cardViewAdapter = new CardViewAdapter(models, this);
         viewPager = findViewById(R.id.viewPager);
         viewPager.setPadding(40, 0, 40, 0);
-        viewPager.setPageMargin(getResources().getDisplayMetrics().widthPixels / -9);
+        viewPager.setPageMargin(getResources().getDisplayMetrics().widthPixels / -7);
         viewPager.setAdapter(cardViewAdapter);
 
         search_text = findViewById(R.id.search_text);
