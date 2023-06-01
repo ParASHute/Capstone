@@ -5,6 +5,9 @@
 교내 길찾기 서비스를 제공하는데 있어 지도상으로 경로를 나타내주는 뿐만아니라 AR를 통해 경로를 보여주는 서비스.
 
 # 유튜브 요약 영상 
+<https://www.youtube.com/watch?v=zbfbi9GLVPg>
+
+
 [![Video Label](http://img.youtube.com/vi/zbfbi9GLVPg/0.jpg)](https://youtu.be/zbfbi9GLVPg)
 
 # 개발 환경
