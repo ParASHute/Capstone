@@ -5,6 +5,8 @@ public class List {
     private String Build;
     private String Office;
     private String Floor;
+    private String Lat;
+    private String Lon;
 
     public String getLat() {
         return Lat;
@@ -21,10 +23,6 @@ public class List {
     public void setLon(String lon) {
         Lon = lon;
     }
-
-    private String Lat;
-    private String Lon;
-
     public List(){}
     public String getProfile(){return Profile;}
     public  void setProfile(String profile) {this.Profile = profile;}
