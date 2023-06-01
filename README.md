@@ -17,11 +17,82 @@
 
 # 주요 기능
 
- ## 지도상에 경로 표시
+ ## LocationEngine 컴포넌트를 통해 현위치 알아내기. 
  
- Mapbox Java SDK에서 제공하는 **Directions API**를 통해 출발지와 목적지에 대한 최소 거리 경로를 얻고 맵상에 그려준다.
+ LocationEngine 컴포넌트를 통해 디바이스의 마지막 위치를 알아낸다. 
 ```java
-   private void getRoute_walking(Point originPosition, Point destinationPosition) {
+    // 실시간 위치 업데이트
+    @SuppressLint("MissingPermission")
+    private void initLocationEngine() {
+        locationEngine = LocationEngineProvider.getBestLocationEngine(this);
+
+        LocationEngineRequest request = new LocationEngineRequest.Builder(DEFAULT_INTERVAL_IN_MILLISECONDS)
+                .setPriority(LocationEngineRequest.PRIORITY_HIGH_ACCURACY)
+                .setMaxWaitTime(DEFAULT_MAX_WAIT_TIME).build();
+        locationEngine.requestLocationUpdates(request, callback, getMainLooper());
+        locationEngine.getLastLocation(callback);
+    }
+
+    @Override   //위치권한
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+    @Override
+    public void onExplanationNeeded(List<String> list) {
+        Toast.makeText(this, R.string.user_location_permission_explanation, Toast.LENGTH_LONG).show();
+    }
+    @Override
+    public void onPermissionResult(boolean b) {
+        if(b) {
+            enableLocationComponent(mapboxMap.getStyle());
+        }else {
+            Toast.makeText(this, R.string.user_location_permission_not_granted, Toast.LENGTH_LONG).show();
+            finish();
+        }
+    }
+```
+## 위치 업데이트하는 콜백함수. 
+```java
+// LocationEngine 콜백함수
+    private static class NavigationActivityLocationCallback implements LocationEngineCallback<LocationEngineResult> {
+        private final WeakReference<NavigationActivity> activityWeakReference;
+
+        NavigationActivityLocationCallback(NavigationActivity activity) {
+            this.activityWeakReference = new WeakReference<>(activity);
+        }
+
+        @Override
+        public void onSuccess(LocationEngineResult locationEngineResult) {
+            NavigationActivity activity = activityWeakReference.get();
+            if(activity != null) {
+                Location location = locationEngineResult.getLastLocation();
+                if(location == null) {
+                    return;
+                }
+
+                Lat = locationEngineResult.getLastLocation().getLatitude();
+                Lon = locationEngineResult.getLastLocation().getLongitude();
+
+                if(activity.mapboxMap != null && locationEngineResult.getLastLocation() != null) {
+                    activity.mapboxMap.getLocationComponent().forceLocationUpdate(locationEngineResult.getLastLocation());
+                }
+            }
+        }
+
+        @Override
+        public void onFailure(@NonNull Exception e) {
+            Log.e("NavigationActivity", e.getLocalizedMessage());
+            NavigationActivity activity = activityWeakReference.get();
+            if(activity != null) {
+                Toast.makeText(activity, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+```
+## 길찾기 메소드
+```java
+// 길찾기 메소드
+    private void getRoute_walking(Point originPosition, Point destinationPosition) {
         client = MapboxDirections.builder()
                 .accessToken(getString(R.string.mapbox_access_token))
                 .routeOptions(
@@ -34,6 +105,7 @@
         client.enqueueCall(new Callback<DirectionsResponse>() {
             @Override
             public void onResponse(Call<DirectionsResponse> call, Response<DirectionsResponse> response) {
+                // Directions API가 요청이 정상적으로 되었을 때.
                 if(response.body() == null) {
                     return;
                 }else if (response.body().routes().size() < 1) {
@@ -53,7 +125,7 @@
                     mapboxMap.getStyle(new Style.OnStyleLoaded() {
                         @Override
                         public void onStyleLoaded(@NonNull Style style) {
-                            GeoJsonSource source = style.getSourceAs(ROUTE_SOURCE_ID);
+                            GeoJsonSource source = style.getSourceAs(ROUTE_SOURCE_ID); // 루트를 지도에 그려줌.
                             if(source != null) {
                                 source.setGeoJson(LineString.fromPolyline(currentRoute.geometry(), PRECISION_6));
                             }
@@ -71,8 +143,27 @@
 ```
  
  ## 학교 주요 시설 리스트(Realtime Database)
+ List 요소 
+  - 빌딩(건물) 이름 (Build)
+  - 장소 이름 (Office)
+  - 층 수 (floor)
+  - 장소 사진 (Profile)
+  - 위도, 경도값 (Lat, Lon)
+  ```java
+  public class List {
+     private String Profile;
+     private String Build;
+     private String Office;
+     private String Floor;
+     private String Lat;
+     private String Lon;
+    }
+  ```
+  ## RecycleView를 통해 리스트 구현.
+  
  
  ## Unity를 통해 AR로 경로 안내
+ 
  
  
 # 참고 자료 
