@@ -111,23 +111,24 @@ public class ListToNavActivity extends AppCompatActivity implements OnMapReadyCa
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this::onMapReady);
 
-        intent = getIntent();
+        intent = getIntent(); // list item으로부터 목적지의 위도와 경도값을 intent로 받아옴.
         destinations = intent.getStringArrayExtra("destination");
         dest_Lat = Double.parseDouble(destinations[1]);
         dest_Lon = Double.parseDouble(destinations[0]);
 
         ar_nav_btn = findViewById(R.id.ar_nav_btn);
-        ar_nav_btn.setOnClickListener(view -> {
+        ar_nav_btn.setOnClickListener(view -> { // AR 길찾기 실행.
             Intent intent = new Intent(ListToNavActivity.this, UnityPlayerActivity.class);
             startActivity(intent);
         });
 
-        working_nav_btn = findViewById(R.id.working_nav_btn);
+        working_nav_btn = findViewById(R.id.working_nav_btn); // 길찾기 메소드 실행. (지도 상에 루트 그려줌)
         working_nav_btn.setOnClickListener(view -> onNavStart());
 
-        back_btn = findViewById(R.id.back_btn);
+        back_btn = findViewById(R.id.back_btn); // 뒤로 가기(다시 리스트 목록 액티비티로 )
         back_btn.setOnClickListener(view -> onBackPressed());
     }
+    // 맵 세팅.
     @Override
     public void onMapReady(@NonNull MapboxMap mapboxMap) {
         this.mapboxMap = mapboxMap;
@@ -140,6 +141,7 @@ public class ListToNavActivity extends AppCompatActivity implements OnMapReadyCa
                 });
     }
 
+    // 길찾기가 실행되도록
     public boolean onNavStart() {
         destinationPosition = Point.fromLngLat(dest_Lon, dest_Lat); // intent로 받은 값을 목적지로 설정.
         originPosition = Point.fromLngLat(Lon, Lat);
@@ -157,6 +159,9 @@ public class ListToNavActivity extends AppCompatActivity implements OnMapReadyCa
         return true;
     }
 
+    /**
+     * Add the route and marker sources to the map
+     */
     private void initSource(@NonNull Style style) {
         style.addSource(new GeoJsonSource(ROUTE_SOURCE_ID));
 
@@ -252,13 +257,10 @@ public class ListToNavActivity extends AppCompatActivity implements OnMapReadyCa
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
-
-
     @Override
     public void onExplanationNeeded(List<String> list) {
         Toast.makeText(this, R.string.user_location_permission_explanation, Toast.LENGTH_LONG).show();
     }
-
     @Override
     public void onPermissionResult(boolean b) {
         if(b) {
@@ -269,6 +271,7 @@ public class ListToNavActivity extends AppCompatActivity implements OnMapReadyCa
         }
     }
 
+    // 길찾기 메소드
     private void getRoute_walking(Point originPosition, Point destinationPosition) {
         client = MapboxDirections.builder()
                 .accessToken(getString(R.string.mapbox_access_token))
@@ -309,7 +312,6 @@ public class ListToNavActivity extends AppCompatActivity implements OnMapReadyCa
                     });
                 }
             }
-
             @Override
             public void onFailure(Call<DirectionsResponse> call, Throwable t) {
                 Toast.makeText(ListToNavActivity.this, "Error " + t.getMessage(), Toast.LENGTH_SHORT).show();
@@ -317,6 +319,7 @@ public class ListToNavActivity extends AppCompatActivity implements OnMapReadyCa
         });
     }
 
+    // 위치 콜백함수
     private static class ListToNavActivityLocationCallback implements LocationEngineCallback<LocationEngineResult> {
         private final WeakReference<ListToNavActivity> activityWeakReference;
         ListToNavActivityLocationCallback(ListToNavActivity activity) {
@@ -327,7 +330,7 @@ public class ListToNavActivity extends AppCompatActivity implements OnMapReadyCa
         public void onSuccess(LocationEngineResult locationEngineResult) {
             ListToNavActivity activity = activityWeakReference.get();
             if(activity != null) {
-                Location location = locationEngineResult.getLastLocation();
+                Location location = locationEngineResult.getLastLocation(); // 현재 위치 get
                 if(location == null) {
                     return;
                 }

@@ -51,8 +51,8 @@
 
         <ImageView
             android:id="@+id/profile"
-            android:layout_width="149dp"
-            android:layout_height="81dp"
+            android:layout_width="150dp"
+            android:layout_height="80dp"
             app:circularflow_defaultRadius="15dp"
             android:layout_marginStart="3dp"
             android:scaleType="fitXY"

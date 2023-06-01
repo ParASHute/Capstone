@@ -127,7 +127,7 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
         mylocBtn = findViewById(R.id.btnMyLoc);
         HSUlocBtn = findViewById(R.id.btnHSU);
 
-        mylocBtn.setOnClickListener(view -> {
+        mylocBtn.setOnClickListener(view -> { // 현재 위치로 이동
             CameraPosition position = new CameraPosition.Builder()
                     .target(new LatLng(Lat, Lon))
                     .zoom(16)
@@ -139,7 +139,7 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
             // Toast.makeText(getApplicationContext(),dest_Lat + " " + dest_Log, Toast.LENGTH_SHORT).show();
         });
 
-        HSUlocBtn.setOnClickListener(view -> {
+        HSUlocBtn.setOnClickListener(view -> { // 학교 위치로 이동
             CameraPosition position = new CameraPosition.Builder()
                     .target(new LatLng(HSULat, HSULon))
                     .zoom(16)
@@ -164,12 +164,13 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
         viewPager.setAdapter(cardViewAdapter);
 
         search_text = findViewById(R.id.search_text);
-        search_text.setOnClickListener(view -> {
+        search_text.setOnClickListener(view -> { // 검색 액티비티로 이동
             Intent intent = new Intent(getApplicationContext(), SearchingKey.class);
             startActivity(intent);
         });
 
     }
+    // 지도 세팅.
     @Override
     public void onMapReady(@NonNull MapboxMap mapboxMap) {
         this.mapboxMap = mapboxMap;
@@ -178,6 +179,7 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
                 style -> enableLocationComponent(style));
     }
 
+    // 맵 클릭 시 클릭 포인트를 목적지로 두고 길찾기 메소드 실행.
     @Override
     public boolean onMapClick(@NonNull LatLng point) {
         destinationPosition = Point.fromLngLat(point.getLongitude(), point.getLatitude()); // 클릭한 위치
@@ -193,10 +195,13 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
                 }
             });
         }
-        getRoute_walking(originPosition, destinationPosition);
+        getRoute_walking(originPosition, destinationPosition); // 길찾기 메소드
         return true;
     }
 
+    /**
+     * Add the route and marker sources to the map
+     */
     private void initSource(@NonNull Style style) {
         style.addSource(new GeoJsonSource(ROUTE_SOURCE_ID));
 
@@ -276,7 +281,7 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
             permissionsManager.requestLocationPermissions(this);
         }
     }
-
+    // 실시간 위치 업데이트
     @SuppressLint("MissingPermission")
     private void initLocationEngine() {
         locationEngine = LocationEngineProvider.getBestLocationEngine(this);
@@ -292,13 +297,10 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
-
-
     @Override
     public void onExplanationNeeded(List<String> list) {
         Toast.makeText(this, R.string.user_location_permission_explanation, Toast.LENGTH_LONG).show();
     }
-
     @Override
     public void onPermissionResult(boolean b) {
         if(b) {
@@ -308,7 +310,7 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
             finish();
         }
     }
-
+    // 길찾기 메소드
     private void getRoute_walking(Point originPosition, Point destinationPosition) {
         client = MapboxDirections.builder()
                 .accessToken(getString(R.string.mapbox_access_token))
@@ -322,6 +324,7 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
         client.enqueueCall(new Callback<DirectionsResponse>() {
             @Override
             public void onResponse(Call<DirectionsResponse> call, Response<DirectionsResponse> response) {
+                // Directions API가 요청이 정상적으로 되었을 때.
                 if(response.body() == null) {
                     return;
                 }else if (response.body().routes().size() < 1) {
@@ -341,7 +344,7 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
                     mapboxMap.getStyle(new Style.OnStyleLoaded() {
                         @Override
                         public void onStyleLoaded(@NonNull Style style) {
-                            GeoJsonSource source = style.getSourceAs(ROUTE_SOURCE_ID);
+                            GeoJsonSource source = style.getSourceAs(ROUTE_SOURCE_ID); // 루트를 지도에 그려줌.
                             if(source != null) {
                                 source.setGeoJson(LineString.fromPolyline(currentRoute.geometry(), PRECISION_6));
                             }
@@ -356,7 +359,7 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
             }
         });
     }
-
+    // LocationEngine 콜백함수
     private static class NavigationActivityLocationCallback implements LocationEngineCallback<LocationEngineResult> {
         private final WeakReference<NavigationActivity> activityWeakReference;
 

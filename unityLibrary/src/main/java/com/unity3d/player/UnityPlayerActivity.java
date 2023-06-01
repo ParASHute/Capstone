@@ -13,6 +13,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.os.Process;
 
+// AR 내비게이션 액티비티 (Unity와 연동)
 
 public class UnityPlayerActivity extends Activity implements IUnityPlayerLifecycleEvents
 {

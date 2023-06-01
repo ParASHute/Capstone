@@ -18,6 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+// 전체 장소 리스트
 public class SearchingKey extends AppCompatActivity {
 
     private RecyclerView recyclerView;
@@ -60,7 +61,7 @@ public class SearchingKey extends AppCompatActivity {
         });
 
         searchView = findViewById(R.id.searchView);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() { // 검색 기능
             @Override
             public boolean onQueryTextSubmit(String query) {
                 return false;
@@ -74,7 +75,7 @@ public class SearchingKey extends AppCompatActivity {
                     adapter.setItems(OriginalDataList);
                 } else {
                     for(int i = 0; i < OriginalDataList.size(); i++) {
-                        if(OriginalDataList.get(i).getOffice() == null)
+                        if(OriginalDataList.get(i).getOffice() == null) // 장소 이름으로 검색
                             Log.e("afterTextChanged", "OriginalDataList is null");
                         else {
                             if(OriginalDataList.get(i).getOffice().toLowerCase().contains(newText.toLowerCase())) {
