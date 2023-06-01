@@ -24,7 +24,7 @@
         android:layout_height="74dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="44dp"
-        android:src="@drawable/sangsangbugi"
+        android:src="@drawable/bugibugi"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toEndOf="@+id/changui_text"

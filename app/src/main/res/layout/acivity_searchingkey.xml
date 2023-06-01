@@ -26,8 +26,8 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="46dp"
-        android:src="@drawable/sangsangbugi"
-        app:layout_constraintBottom_toTopOf="@+id/gonghak_listview"
+        android:src="@drawable/bugibugi"
+        app:layout_constraintBottom_toTopOf="@+id/searchingkey_listview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toTopOf="parent" />
