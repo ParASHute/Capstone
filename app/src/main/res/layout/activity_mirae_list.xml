@@ -10,28 +10,22 @@
         android:id="@+id/imageView"
         android:layout_width="74dp"
         android:layout_height="74dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="48dp"
         android:src="@drawable/bugibugi"
-        app:layout_constraintBottom_toTopOf="@+id/mirae_listview"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="76dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="6dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="156dp"
         android:text="미래관"
         android:textColor="@android:color/black"
         android:textSize="36sp"
-        app:layout_constraintBottom_toTopOf="@+id/mirae_listview"
-        app:layout_constraintEnd_toStartOf="@+id/imageView"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -39,7 +33,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/recyclerview_backgroud"

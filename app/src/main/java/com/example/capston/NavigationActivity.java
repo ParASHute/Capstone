@@ -134,7 +134,7 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
                     .bearing(0)
                     .tilt(0)
                     .build();
-            mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(position), 7000);
+            mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(position), 3000);
             Toast.makeText(getApplicationContext(), String.format("내 위치로 이동합니다."), Toast.LENGTH_LONG).show();
             // Toast.makeText(getApplicationContext(),dest_Lat + " " + dest_Log, Toast.LENGTH_SHORT).show();
         });
@@ -146,7 +146,7 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
                     .bearing(0)
                     .tilt(0)
                     .build();
-            mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(position), 7000);
+            mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(position), 3000);
             Toast.makeText(getApplicationContext(), String.format("학교 위치로 이동합니다."), Toast.LENGTH_LONG).show();
         });
 
