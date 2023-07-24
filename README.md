@@ -169,7 +169,7 @@
   ![listview](https://github.com/ParASHute/Capstone/assets/55376183/1e6b3375-918b-4797-bf93-977776db530c)
  
  ## Unity를 통해 AR로 경로 안내
- 
+https://github.com/devDevyne/Unity-AR-Navigation/blob/master/README.md
  
  
 # 참고 자료 
