@@ -167,6 +167,26 @@
   ```
   ## RecycleView를 통해 리스트 구현.
   ![listview](https://github.com/ParASHute/Capstone/assets/55376183/1e6b3375-918b-4797-bf93-977776db530c)
+
+  ## 리스트 목록 클릭 시 경로 안내 
+   ```java
+    // 길찾기가 실행되도록
+    public void onNavStart() {
+        destinationPosition = Point.fromLngLat(dest_Lon, dest_Lat); // intent로 받은 값을 목적지로 설정.
+        originPosition = Point.fromLngLat(Lon, Lat);
+        if(mapboxMap != null) {
+            mapboxMap.setStyle(new Style.Builder().fromUri("mapbox://styles/youngrockchoi/clgib5i6q000101o637a7nha5"), new Style.OnStyleLoaded() {
+                @Override
+                public void onStyleLoaded(@NonNull Style style) {
+                    enableLocationComponent(style);
+                    initSource(style);
+                    initLayers(style);
+                }
+            });
+        }
+        getRoute_walking(originPosition, destinationPosition); // 길찾기 메소드 실행.
+    }
+  ```
  
  ## Unity를 통해 AR로 경로 안내
 https://github.com/devDevyne/Unity-AR-Navigation/blob/master/README.md
